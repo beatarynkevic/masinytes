@@ -1,5 +1,5 @@
 /*
-void gazuok(int kiek)
+    void gazuok(int kiek)
     void stabdyk(int kiek)
     void vaziuok()
 

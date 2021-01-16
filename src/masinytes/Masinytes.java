@@ -15,23 +15,55 @@ public class Masinytes {
 
     public static void main(String[] args) {
         int[] cars = new int[8];
+        int interm = 100;
+        boolean doRace = true;
         
-        int[][] rez = new int[cars.length][cars.length];
-        
-        for (int i = 0; i < cars.length; i++) {
-            for (int j = 0; j < cars.length; j++) {
-                int randomDistance = (int) (Math.random() * 10) + 1;
-                cars[j] += randomDistance;
-                rez[i][j] = cars[j];
+        while (doRace) {
+            for (int i = 0; i < cars.length; i++) {     //visos masinos pavaziavo
+                cars[i] += Math.random() * 10 + 1;
+            }
+            
+            boolean printInterm = false;        //komentatorius
+            int intermWinner = 0;
+            int intermWinnerKm = 0;
+            for (int i = 0; i < cars.length; i++) {
+                if (cars[i] > intermWinnerKm) {
+                    intermWinner = i + 1;
+                    intermWinnerKm = cars[i];
+                }
+                if (cars[i] >= interm) {
+                    printInterm = true;
+                    interm += 100;
+                }
+            }
+            if (printInterm) {
+                for (int i = 0; i < cars.length; i++) {
+                    System.out.print(cars[i] + "\t");
+                }
+                System.out.println();
+                System.out.println(intermWinner + " automobilis nuvaziavo: " + intermWinnerKm);
+                System.out.println();
+            }
+            for (int i = 0; i < cars.length; i++) {     //tikrinimas
+                if (cars[i] >= 1000) {
+                    doRace = false;
+                    break;
+                }
             }
         }
-        for (int i = 0; i < rez.length; i++) {
-            int[] eilute = rez[i];
-            for (int j = 0; j < eilute.length; j++) {
-                int elementas = eilute[j];
-                System.out.print(elementas + " ");
+        
+        for (int i = 0; i < cars.length - 1; i++) {     //rusiavimas
+            for (int j = i + 1; j < cars.length; j++) {
+                if (cars[i] < cars[j]) {
+                    int tmp = cars[i];
+                    cars[i] = cars[j];
+                    cars[j] = tmp;
+                }
             }
-            System.out.println();
+        }
+        
+        for (int i = 0; i < cars.length; i++) {
+            System.out.println(cars[i]);
         }
     }
 }
