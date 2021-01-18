@@ -19,20 +19,28 @@ public class Masinytes {
             new Masina("Antra", 160),
             new Masina("Trecia", 180),
             new Masina("Ketvirta", 220),
-            //new SportineMasina("sp1", 300),
-            //new SportineMasina("sp1", 300),
+            new SportineMasina("sp1", 300),
+            new SportineMasina("sp1", 300)
         };
         
-        int[] cars = new int[8];
         int interm = 100;
         boolean doRace = true;
         while (doRace) {
-//            for (int a = 0; a < 10; a++) { 
             for (int i = 0; i < race.length; i++) {     //visos masinos pavaziavo
-                race[i].nuspreskKadaryt();
-  
+                if (race[i] instanceof SportineMasina){
+                    if (Math.random() < 0.5) {
+                        SportineMasina sm =(SportineMasina) race[i];
+                        sm.pakeistiSpoileri();
+                    }
+                }
+                double mr = Math.random();
+                if(mr < 0.3) {
+                    race[i].stabdyk((int) (Math.random() * 5 + 1)); //nekeis greicio
+                } else if (mr < 0.8) {
+                    race[i].gazuok((int)(Math.random() * 10 + 1)); //metodas stabdo
+                }
+                    race[i].vaziuok(); //metodas gazuoja
             }
-            
             boolean printInterm = false;        //komentatorius
             int intermWinner = 0;
             int intermWinnerKm = 0;
@@ -51,7 +59,7 @@ public class Masinytes {
                     System.out.print(race[i].getKelias() + "\t");
                 }
                 System.out.println();
-                System.out.println(intermWinner + " automobilis nuvaziavo: " + intermWinnerKm);
+                System.out.println(intermWinner + " automobilis pirmauja ");
                 System.out.println();
             }
             for (int i = 0; i < race.length; i++) {     //tikrinimas
@@ -64,14 +72,14 @@ public class Masinytes {
         for (int i = 0; i < race.length - 1; i++) {     //rusiavimas
             for (int j = i + 1; j < race.length; j++) {
                 if (race[i].getKelias() < race[j].getKelias()) {
-                    Masina tmp = race[j];
-                    race[j] = race[i];
-                    race[i] = tmp;
+                    Masina tmp = race[i];
+                    race[i] = race[j];
+                    race[j] = tmp;
                 }
             }
         }
         for (int i = 0; i < race.length; i++) {
-            System.out.println(race[i].getKelias());
+            System.out.println(race[i]);
         }
     }
     /*

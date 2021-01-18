@@ -24,52 +24,22 @@ public class Masina {
         this.kelias = 0;
         this.greitis = 0;
     }
-     public void gazuok() {
-         // padidinti greiti
-         //jei greitis > max greitis, greitis = max greitis.
-         //nuvaziuoti atstuma./issaugoti duomenis
-         this.greitis += Math.random() * 10 +1;
+     public void gazuok(int kiek) {
+         this.greitis += kiek;
          if (this.greitis > this.maxGreitis){
              this.greitis = this.maxGreitis;
          }
-         this.kelias += this.greitis;
      }
-     
-     public void stabdyk() {
-         
-         this.greitis -= Math.random() * 5 + 1;
+     public void stabdyk(int kiek) {
+         this.greitis -= kiek;
          if(this.greitis < 0) {
              this.greitis = 0;
          }
-         this.kelias += this.greitis;
      }
-     
      public void vaziuok() { //kelias padideja ant tiek koks masinos gretiis x = greitis - kelias, kelias+= x
          this.kelias += this.greitis;
-         if(this.greitis == 0) {
-             this.gazuok();
-         }
      }
      
-     public void nuspreskKadaryt() {
-         double mr = Math.random();
-                if(mr <= 0.2) {
-//                    System.out.println("20% tikimybes");
-                    this.vaziuok();
-                    //nekeis greicio
-                }
-                if(mr > 0.2 && mr <= 0.5) {
-//                    System.out.println("30% tikimybes");
-                    this.stabdyk();
-                    //metodas stabdo
-                }
-                if(mr > 0.5) {
-//                    System.out.println("50% tikimybes");
-                    this.gazuok();
-                    //metodas gazuoja
-                }
-     }
-
     public int getKelias() {
         return kelias;
     }
@@ -77,7 +47,9 @@ public class Masina {
     public void setKelias(int kelias) {
         this.kelias = kelias;
     }
-    
-  
-    
+
+    @Override
+    public String toString() {
+        return "Masina{" + "pavadinimas=" + pavadinimas + ", maxGreitis=" + maxGreitis + ", kelias=" + kelias + ", greitis=" + greitis + '}';
+    }
 }
